@@ -19,6 +19,7 @@ IAM – Grants permissions for Lambda to access S3.
 🗂 Folder Structure
 
 📁 ServerlessPhotoUpload
+
  ├── lambda_function.py   # Main Lambda code
  ├── README.md            # Project documentation
 
@@ -29,8 +30,6 @@ IAM – Grants permissions for Lambda to access S3.
 Open AWS Console → S3 → Create bucket
 
 Name it something unique, e.g. serverlessphotouploadbucket
-
-Choose the region (e.g., ap-south-1)
 
 Keep ACLs enabled and Block all public access unchecked (optional — can change later).
 
@@ -61,7 +60,7 @@ Go to Permissions → Bucket Policy and paste:
 {
   "Version": "2012-10-17",
   "Statement": [
-    {
+     {
       "Sid": "PublicReadForObjects",
       "Effect": "Allow",
       "Principal": "*",
@@ -108,43 +107,6 @@ Click Create function
 ![Architecture](images/img-4.png)
 
 5️⃣ Add Lambda Code
-
-Replace the default code with:
-
-import json
-import boto3
-import base64
-import uuid
-
-def lambda_handler(event, context):
-    s3 = boto3.client('s3')
-    bucket_name = "serverlessphotouploadbucket"
-    
-    # Example file details
-    file_name = f"{uuid.uuid4()}.jpg"
-    file_content = base64.b64decode(event['body'])
-    
-    # Upload file to S3
-    s3.put_object(
-        Bucket=bucket_name,
-        Key=file_name,
-        Body=file_content,
-        ContentType='image/jpeg',
-        ACL='public-read'  # <-- makes image public automatically
-    )
-    
-    file_url = f"https://{bucket_name}.s3.amazonaws.com/{file_name}"
-    
-    return {
-        'statusCode': 200,
-        'body': json.dumps({
-            'message': '✅ File uploaded successfully!',
-            'file_url': file_url
-        })
-    }
-
-
-✅ Note: The line ACL='public-read' ensures every uploaded image is publicly viewable.
 
 6️⃣ Deploy and Test
 
