@@ -90,7 +90,7 @@ AWSLambdaBasicExecutionRole
 
 Click Create Role
 
-![Architecture](images/img-3.png)
+![Architecture](image/img-3.png)
 
 4️⃣ Create Lambda Function
 
@@ -106,7 +106,7 @@ Choose the IAM role created above
 
 Click Create function
 
-![Architecture](images/img-4.png)
+![Architecture](image/img-4.png)
 
 5️⃣ Add Lambda Code
 
