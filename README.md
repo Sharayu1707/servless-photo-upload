@@ -23,6 +23,7 @@ IAM – Grants permissions for Lambda to access S3.
 📁 ServerlessPhotoUpload
 
  ├── lambda_function.py   # Main Lambda code
+ 
  ├── README.md            # Project documentation
 
 ## Steps to Deploy
