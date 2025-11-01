@@ -1,14 +1,16 @@
 # servless-photo-upload
 
 
-🧩 Overview
+## Overview
 
 This project demonstrates a serverless photo upload application built using AWS Lambda, S3, and IAM.
 The Lambda function uploads photos to an S3 bucket and returns the public URL of the uploaded image.
 
-⚙️ Architecture
+## Architecture 
 
-Services used:
+User → IAM -> Lambda → S3 Bucket 
+
+## Services used:
 
 AWS Lambda – Handles the file upload logic.
 
@@ -16,14 +18,14 @@ Amazon S3 – Stores uploaded images.
 
 IAM – Grants permissions for Lambda to access S3.
 
-🗂 Folder Structure
+## Folder Structure
 
 📁 ServerlessPhotoUpload
 
  ├── lambda_function.py   # Main Lambda code
  ├── README.md            # Project documentation
 
-🚀 Steps to Deploy
+## Steps to Deploy
 
 1️⃣ Create an S3 Bucket
 
@@ -60,16 +62,16 @@ Go to Permissions → Bucket Policy and paste:
 {
   "Version": "2012-10-17",
   "Statement": [
-     {
+    {
       "Sid": "PublicReadForObjects",
       "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::serverlessphotouploadbucket/*"
+      "Principal": "*", 
+       "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::serverlessphotouploadbucket/*" 
     }
+    
   ]
 }
-
 
 ✅ This allows public read access for all files inside your bucket.
 
@@ -133,7 +135,31 @@ You should see:
 File uploaded successfully!
 URL: https://musuujljeipo3ylarkb6vowen40godcj.lambda-url.ap-south-1.on.aws/
 
-🏁 Conclusion
+## Advantages
+
+No servers needed – Fully serverless, so no EC2 setup or maintenance.
+
+Low cost – Pay only for what you use (Lambda, S3, API calls).
+
+Auto scaling – Can handle many uploads at the same time automatically.
+
+High availability – AWS services ensure your app runs 24/7.
+
+Secure uploads – Uses IAM roles and policies for controlled access.
+
+## Disadvantages
+
+Cold start delay – First Lambda call may take a few seconds to start.
+
+Limited runtime – Lambda has execution time and memory limits.
+
+Public access risk – If S3 is not configured properly, files can be exposed.
+
+Debugging is harder – Logs are in CloudWatch, not as easy as local debugging.
+
+Complex permissions – IAM role setup must be correct, or uploads may fail.
+
+## Conclusion
 
 This project demonstrates how to build a Serverless Photo Upload Application using AWS Lambda and Amazon S3, without managing any servers.
 
